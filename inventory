@@ -1,0 +1,16 @@
+[control]
+10.240.0.2
+
+[web]
+10.240.0.3
+
+[monitor]
+10.240.0.4
+
+[db]
+10.240.0.5
+
+[nodes:children]
+web
+monitor
+db
