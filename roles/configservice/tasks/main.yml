@@ -1,0 +1,27 @@
+---
+# tasks file for roles/configservice
+- name: Create content in {{ dest }}
+  copy:
+    content: "{{ content }}"
+    dest: "{{ dest }}"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    mode: "{{ mode }}"
+  register: servicevar
+  when: content != ""
+
+- name: Copy files in {{ dest }}
+  copy:
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    mode: "{{ mode }}"
+  register: servicevar
+  when: src != ""
+
+- name: restart 
+  service:
+    name: "{{ service }}"
+    state: restarted
+  when: servicevar.changed
